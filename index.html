@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piyush Trivedi — Project Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #08080a;
+    color: #f0f0f0;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .portfolio {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #0e0e11;
+    border: 1px solid #1e1e24;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 2.5rem 2.5rem 2rem;
+    border-bottom: 1px solid #1e1e24;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .avatar {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: #13131a;
+    border: 1px solid #2a2a35;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 500; color: #60a5fa;
+    flex-shrink: 0;
+  }
+  .hero h1 { font-size: 22px; font-weight: 500; color: #f0f0f0; letter-spacing: -0.3px; margin-bottom: 3px; }
+  .hero .role { font-size: 13px; color: #60a5fa; margin-bottom: 12px; }
+  .hero .summary { font-size: 13px; color: #9ca3af; line-height: 1.7; max-width: 540px; margin-bottom: 14px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 11px;
+    border: 1px solid #2a2a35;
+    border-radius: 999px;
+    font-size: 12px; color: #9ca3af;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .pill:hover { border-color: #60a5fa; color: #f0f0f0; }
+  .pill i { font-size: 13px; }
+
+  /* STATS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid #1e1e24;
+  }
+  .stat {
+    padding: 1.2rem 1rem;
+    text-align: center;
+    border-right: 1px solid #1e1e24;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-size: 22px; font-weight: 500; color: #60a5fa; }
+  .stat-label { font-size: 10px; color: #4b5563; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    border-bottom: 1px solid #1e1e24;
+    padding: 0 1.5rem;
+    background: #0e0e11;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    padding: 11px 14px;
+    font-size: 11px; font-weight: 500;
+    color: #4b5563;
+    border: none; background: none; cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-family: 'Inter', sans-serif;
+  }
+  .nav-btn.active { color: #60a5fa; border-bottom-color: #60a5fa; }
+  .nav-btn:hover:not(.active) { color: #d1d5db; }
+
+  /* PANELS */
+  .panel { display: none; padding: 2rem 2.5rem; }
+  .panel.active { display: block; }
+
+  .section-label {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.12em; color: #374151;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  /* WHY GRID */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .why-card {
+    border: 1px solid #1e1e24;
+    border-radius: 10px;
+    padding: 1.1rem;
+    transition: border-color 0.15s;
+  }
+  .why-card:hover { border-color: #2a2a35; }
+  .why-icon { font-size: 18px; color: #60a5fa; margin-bottom: 8px; }
+  .why-title { font-size: 13px; font-weight: 500; color: #e5e7eb; margin-bottom: 4px; }
+  .why-desc { font-size: 11px; color: #6b7280; line-height: 1.65; }
+
+  /* EXPERIENCE */
+  .exp-card {
+    border: 1px solid #1e1e24;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.15s;
+  }
+  .exp-card:hover { border-color: #2a2a35; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+  .exp-role { font-size: 14px; font-weight: 500; color: #f0f0f0; }
+  .exp-company { font-size: 12px; color: #60a5fa; margin-top: 2px; }
+  .exp-date { font-size: 11px; color: #374151; white-space: nowrap; margin-left: 1rem; }
+  .bullets { margin-top: 10px; list-style: none; padding: 0; }
+  .bullets li {
+    font-size: 12px; color: #9ca3af;
+    line-height: 1.65; padding: 2px 0 2px 14px;
+    position: relative;
+  }
+  .bullets li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: #1d4ed8;
+  }
+
+  /* PROJECTS */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  .proj-card {
+    border: 1px solid #1e1e24;
+    border-radius: 10px;
+    padding: 1.1rem;
+    transition: border-color 0.15s;
+  }
+  .proj-card:hover { border-color: #2a2a35; }
+  .proj-icon { font-size: 18px; color: #60a5fa; margin-bottom: 8px; }
+  .proj-title { font-size: 13px; font-weight: 500; color: #e5e7eb; margin-bottom: 4px; }
+  .proj-desc { font-size: 11px; color: #6b7280; line-height: 1.65; }
+  .proj-tag {
+    display: inline-block; margin-top: 8px;
+    padding: 2px 8px;
+    background: #172554; color: #93c5fd;
+    border-radius: 5px; font-size: 10px; font-weight: 500;
+  }
+
+  /* SKILLS */
+  .skill-group { margin-bottom: 1.25rem; }
+  .skill-group-name { font-size: 12px; font-weight: 500; color: #d1d5db; margin-bottom: 7px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    padding: 3px 9px;
+    background: #13131a; border: 1px solid #2a2a35;
+    border-radius: 5px; font-size: 11px; color: #4b5563;
+  }
+  .tag.core { background: #172554; border-color: #1e3a8a; color: #93c5fd; }
+  .tag.learning { background: #052e16; border-color: #14532d; color: #86efac; }
+  .divider { height: 1px; background: #1e1e24; margin: 1.25rem 0; }
+  .legend { display: flex; gap: 14px; margin-top: 1rem; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #374151; }
+  .legend-dot { width: 9px; height: 9px; border-radius: 2px; }
+
+  /* EDUCATION */
+  .edu-card {
+    border: 1px solid #1e1e24;
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.15s;
+  }
+  .edu-card:hover { border-color: #2a2a35; }
+  .edu-icon {
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    background: #13131a; border: 1px solid #2a2a35;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .edu-icon i { font-size: 18px; color: #60a5fa; }
+  .edu-degree { font-size: 14px; font-weight: 500; color: #f0f0f0; }
+  .edu-school { font-size: 12px; color: #60a5fa; margin-top: 2px; }
+  .edu-meta { font-size: 11px; color: #374151; margin-top: 5px; }
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    background: #172554; color: #93c5fd;
+    border-radius: 5px; font-size: 10px; font-weight: 500;
+    margin-left: 5px;
+  }
+  .badge.green { background: #052e16; color: #86efac; }
+
+  /* CTA */
+  .cta {
+    border: 1px solid #1e1e24;
+    border-radius: 10px;
+    padding: 1.75rem;
+    text-align: center;
+    background: #111116;
+    margin-top: 1rem;
+  }
+  .cta h3 { font-size: 16px; font-weight: 500; color: #f0f0f0; margin-bottom: 6px; }
+  .cta p { font-size: 12px; color: #6b7280; margin-bottom: 1.25rem; }
+  .cta-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 12px; font-weight: 500;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid #2a2a35;
+    background: #1a1a20; color: #d1d5db;
+    transition: border-color 0.15s, color 0.15s;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+  }
+  .btn:hover { border-color: #60a5fa; color: #f0f0f0; }
+  .btn.primary { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
+  .btn.primary:hover { background: #2563eb; border-color: #2563eb; }
+
+  /* CONTACT TABLE */
+  .contact-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+  .contact-table tr td { padding: 10px 0; color: #9ca3af; }
+  .contact-table tr td:first-child { width: 32px; }
+  .contact-table tr td:nth-child(2) { color: #4b5563; }
+  .contact-table tr td:last-child { text-align: right; }
+  .contact-table tr + tr td { border-top: 1px solid #1e1e24; }
+  .contact-table a { color: #60a5fa; text-decoration: none; }
+  .contact-table a:hover { color: #93c5fd; }
+
+  @media (max-width: 600px) {
+    body { padding: 0; }
+    .portfolio { border-radius: 0; border: none; }
+    .hero { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .why-grid { grid-template-columns: 1fr; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .panel { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="portfolio">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="avatar">PT</div>
+    <div>
+      <h1>Piyush Trivedi</h1>
+      <div class="role">Project Engineer (Materials &amp; Process)</div>
+      <p class="summary">MSc-qualified Project Engineer with nearly 2 years at Senior Aerospace BWT, delivering safety-critical aerospace programmes across £1M to £20M. Background spanning materials R&amp;D, polymer process development, and end-to-end programme delivery — open to roles in materials engineering, process engineering, manufacturing, R&amp;D, and engineering analysis.</p>
+      <div class="pills">
+        <a class="pill" href="mailto:trivedi.piyush.0607@gmail.com"><i class="ti ti-mail"></i>trivedi.piyush.0607@gmail.com</a>
+        <a class="pill" href="tel:+447778243245"><i class="ti ti-phone"></i>+44 7778 243245</a>
+        <a class="pill" href="https://www.linkedin.com/in/piyush-trivedi0607/" target="_blank"><i class="ti ti-brand-linkedin"></i>LinkedIn</a>
+        <span class="pill"><i class="ti ti-map-pin"></i>Manchester, UK</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Years experience</div></div>
+    <div class="stat"><div class="stat-num">£20M</div><div class="stat-label">Largest programme</div></div>
+    <div class="stat"><div class="stat-num">990</div><div class="stat-label">Samples reported</div></div>
+    <div class="stat"><div class="stat-num">30%</div><div class="stat-label">Cycle time saved</div></div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showTab('why',this)">Why hire me</button>
+    <button class="nav-btn" onclick="showTab('exp',this)">Experience</button>
+    <button class="nav-btn" onclick="showTab('proj',this)">Projects</button>
+    <button class="nav-btn" onclick="showTab('skills',this)">Skills</button>
+    <button class="nav-btn" onclick="showTab('edu',this)">Education</button>
+    <button class="nav-btn" onclick="showTab('contact',this)">Contact</button>
+  </nav>
+
+  <!-- WHY HIRE ME -->
+  <div id="why" class="panel active">
+    <p class="section-label">Key strengths</p>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon"><i class="ti ti-atom"></i></div><div class="why-title">Materials science depth</div><div class="why-desc">Characterised 20+ polymer, composite, and adhesive material lines, qualified to Boeing, Airbus, and AS9100 standards.</div></div>
+      <div class="why-card"><div class="why-icon"><i class="ti ti-chart-dots"></i></div><div class="why-title">Data-driven engineering</div><div class="why-desc">Built 8 Excel/VBA tools automating compliance checks and materials selection, cutting decision cycle time by ~30%.</div></div>
+      <div class="why-card"><div class="why-icon"><i class="ti ti-checklist"></i></div><div class="why-title">End-to-end delivery</div><div class="why-desc">Owned a 7-product, £20M programme from bid through Gate-4 qualification, reporting to CFO level.</div></div>
+      <div class="why-card"><div class="why-icon"><i class="ti ti-flask"></i></div><div class="why-title">Qualification testing</div><div class="why-desc">Designed structured test programmes, qualifying 5 material lines from 32 candidates across 990 samples.</div></div>
+      <div class="why-card"><div class="why-icon"><i class="ti ti-bolt"></i></div><div class="why-title">Process simulation</div><div class="why-desc">Aspen Plus/HYSYS for CO2 capture modelling (BTech), with active DWSIM and Aspen V14 development.</div></div>
+      <div class="why-card"><div class="why-icon"><i class="ti ti-trending-up"></i></div><div class="why-title">Continuous growth</div><div class="why-desc">Actively learning SQL and AI/ML fundamentals alongside Plastics Engineering Part III and TGA — in role.</div></div>
+    </div>
+    <div class="cta">
+      <h3>Open to new opportunities across the UK</h3>
+      <p>Targeting roles in <strong>Materials Engineering</strong>, <strong>Process Engineering</strong>, <strong>Manufacturing Engineering</strong>, <strong>R&amp;D</strong>, and <strong>Engineering Analysis</strong>. Skilled Worker visa sponsorship required.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:trivedi.piyush.0607@gmail.com"><i class="ti ti-mail"></i>Get in touch</a>
+        <a class="btn" href="https://www.linkedin.com/in/piyush-trivedi0607/" target="_blank"><i class="ti ti-brand-linkedin"></i>LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div id="exp" class="panel">
+    <p class="section-label">Work experience</p>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div><div class="exp-role">Project Design Engineer / Materials &amp; Process Engineer</div><div class="exp-company">Senior Aerospace BWT, Adlington, UK</div></div>
+        <div class="exp-date">Sep 2024 – Present</div>
+      </div>
+      <ul class="bullets">
+        <li>Delivered a 7-product, £20M programme from bid through Gate-4 customer qualification sign-off, reporting to CFO level</li>
+        <li>Characterised 20+ polymer, composite, and adhesive material lines, correlating processing parameters with mechanical and surface properties</li>
+        <li>Progressed a non-metallic materials R&amp;D programme from TRL 2 to TRL 6 across thermoplastic, composite, and adhesive systems</li>
+        <li>Down-selected 5 validated material lines from 32 candidates through systematic testing and data analysis</li>
+        <li>Produced 75 qualification reports across 990 tested samples for customer approval and serial production compliance</li>
+        <li>Built 8 Excel/VBA tools for scheduling, cost tracking, and materials selection, reducing decision cycle time by ~30%</li>
+        <li>Dispositioned 75+ non-conformances with root cause analysis and corrective action documentation</li>
+        <li>Designed 120+ parts across 15+ customer projects to FAA, Boeing, Airbus, and AS9100 standards in CATIA V5</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div><div class="exp-role">Industrial Intern</div><div class="exp-company">Bhilai Steel Plant (BSP), India</div></div>
+        <div class="exp-date">May 2019 – Jul 2019</div>
+      </div>
+      <ul class="bullets">
+        <li>Analysed risk and production reports across reactor systems, contributing to a 20% improvement in manufacturing profitability</li>
+        <li>Prepared supply chain compliance reports for four reactor systems, assessing supplier resource plans against specification adherence</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="proj" class="panel">
+    <p class="section-label">Research &amp; academic projects</p>
+    <div class="proj-grid">
+      <div class="proj-card"><div class="proj-icon"><i class="ti ti-microscope"></i></div><div class="proj-title">MSc dissertation — Magnesium LPSO alloys</div><div class="proj-desc">Discovered a previously unreported microstructure in LPSO-containing Mg alloys via optical microscopy and SEM. Validated JMatPro and Thermo-Calc (CALPHAD) predictions across 9 temperature-time combinations.</div><span class="proj-tag">Distinction</span></div>
+      <div class="proj-card"><div class="proj-icon"><i class="ti ti-atom-2"></i></div><div class="proj-title">Graphene via liquid-phase exfoliation</div><div class="proj-desc">Characterised few-layer graphene using SEM, Raman spectroscopy, and UV-Vis spectroscopy. Optimised process parameters and validated outputs against acoustic pressure simulations.</div><span class="proj-tag">MSc group project</span></div>
+      <div class="proj-card"><div class="proj-icon"><i class="ti ti-cloud"></i></div><div class="proj-title">CO2 capture modelling — BTech dissertation</div><div class="proj-desc">Modelled CO2 capture processes using Aspen Plus and HYSYS. Conducted FMEA across 28 failure modes on post-combustion carbon capture systems.</div><span class="proj-tag">Distinction</span></div>
+      <div class="proj-card"><div class="proj-icon"><i class="ti ti-tools"></i></div><div class="proj-title">Nickel alloy selection for subsea infrastructure</div><div class="proj-desc">Evaluated Monel 400, Hastelloy C-276, and Inconel 625 against corrosion and SCC criteria, recommending Inconel 625 with structured technical rationale.</div><span class="proj-tag">Materials selection</span></div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills" class="panel">
+    <p class="section-label">Core competencies</p>
+    <div class="skill-group"><div class="skill-group-name">Materials science &amp; R&amp;D</div><div class="skill-tags"><span class="tag core">Polymer process development</span><span class="tag core">Non-metallic materials qualification</span><span class="tag core">Composites &amp; adhesives</span><span class="tag core">Cure cycle optimisation</span><span class="tag">Alloy systems</span><span class="tag">Materials down-selection</span><span class="tag">Failure analysis</span></div></div>
+    <div class="skill-group"><div class="skill-group-name">Testing &amp; characterisation</div><div class="skill-tags"><span class="tag core">Optical microscopy &amp; SEM</span><span class="tag core">Flammability testing (FAR 25.853)</span><span class="tag">Adhesion &amp; durability testing</span><span class="tag">TGA (in progress)</span><span class="tag">Raman spectroscopy</span><span class="tag">UV-Vis spectroscopy</span></div></div>
+    <div class="skill-group"><div class="skill-group-name">Process engineering &amp; simulation</div><div class="skill-tags"><span class="tag core">Aspen Plus / HYSYS</span><span class="tag core">DWSIM (active)</span><span class="tag">FMEA / HAZOP</span><span class="tag">Process optimisation</span><span class="tag">CO2 capture modelling</span></div></div>
+    <div class="skill-group"><div class="skill-group-name">Programme delivery &amp; compliance</div><div class="skill-tags"><span class="tag core">AS9100 / AS5131</span><span class="tag core">Non-conformance management</span><span class="tag">Work package management</span><span class="tag">Risk assessment</span><span class="tag">Gate reviews</span></div></div>
+    <div class="divider"></div>
+    <p class="section-label">Tools &amp; software</p>
+    <div class="skill-group"><div class="skill-tags"><span class="tag core">Advanced Excel / VBA</span><span class="tag core">CATIA V5</span><span class="tag core">3DEXPERIENCE PLM</span><span class="tag">SolidWorks</span><span class="tag">JMatPro</span><span class="tag">Thermo-Calc</span><span class="tag">Python</span><span class="tag learning">SQL (active)</span><span class="tag learning">AI / ML fundamentals (active)</span><span class="tag">MATLAB</span><span class="tag">GRANTA EduPack</span><span class="tag">SyteLine ERP</span></div></div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#172554;border:1px solid #1e3a8a"></div>Core / highest relevance</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#052e16;border:1px solid #14532d"></div>Actively learning</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#13131a;border:1px solid #2a2a35"></div>Supporting skills</div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div id="edu" class="panel">
+    <p class="section-label">Education</p>
+    <div class="edu-card">
+      <div class="edu-icon"><i class="ti ti-school"></i></div>
+      <div>
+        <div class="edu-degree">MSc Advanced Engineering Materials<span class="badge">Merit</span><span class="badge green">Dissertation: Distinction</span></div>
+        <div class="edu-school">University of Manchester, UK</div>
+        <div class="edu-meta">Sep 2022 – Sep 2023 &nbsp;·&nbsp; Advanced Engineering Materials, Advanced Metals Processing, Superalloys, Graphene and Nanomaterials</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon"><i class="ti ti-school"></i></div>
+      <div>
+        <div class="edu-degree">BTech Chemical Engineering<span class="badge">First Class</span><span class="badge green">Dissertation: Distinction</span></div>
+        <div class="edu-school">Vellore Institute of Technology, India</div>
+        <div class="edu-meta">2017 – 2021 &nbsp;·&nbsp; Process engineering, thermodynamics, petroleum technology, process simulation, chemical reaction engineering</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <p class="section-label">Certifications &amp; professional development</p>
+    <div class="exp-card">
+      <ul class="bullets">
+        <li>Plastics Engineering Part I &amp; II — complete</li>
+        <li>Plastics Engineering Part III — in progress</li>
+        <li>TA Instruments TGA course — in progress</li>
+        <li>SQL — active learning</li>
+        <li>AI / ML fundamentals certification — in progress</li>
+        <li>Udemy Aspen V14 course — in progress</li>
+        <li>IOM3 member</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="panel">
+    <p class="section-label">Get in touch</p>
+    <div class="exp-card" style="max-width:460px">
+      <table class="contact-table">
+        <tr><td><i class="ti ti-mail" style="font-size:16px;color:#60a5fa"></i></td><td>Email</td><td><a href="mailto:trivedi.piyush.0607@gmail.com">trivedi.piyush.0607@gmail.com</a></td></tr>
+        <tr><td><i class="ti ti-phone" style="font-size:16px;color:#60a5fa"></i></td><td>Phone</td><td><a href="tel:+447778243245" style="color:#f0f0f0;text-decoration:none">+44 7778 243245</a></td></tr>
+        <tr><td><i class="ti ti-brand-linkedin" style="font-size:16px;color:#60a5fa"></i></td><td>LinkedIn</td><td><a href="https://www.linkedin.com/in/piyush-trivedi0607/" target="_blank">piyush-trivedi0607</a></td></tr>
+        <tr><td><i class="ti ti-map-pin" style="font-size:16px;color:#60a5fa"></i></td><td>Location</td><td style="color:#f0f0f0">Manchester, UK</td></tr>
+      </table>
+    </div>
+    <div class="cta" style="max-width:460px">
+      <h3>Open to opportunities across the UK</h3>
+      <p>Targeting Materials, Process, Manufacturing, R&amp;D, and Analyst roles. Skilled Worker visa sponsorship required.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:trivedi.piyush.0607@gmail.com"><i class="ti ti-mail"></i>Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/piyush-trivedi0607/" target="_blank"><i class="ti ti-brand-linkedin"></i>LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
